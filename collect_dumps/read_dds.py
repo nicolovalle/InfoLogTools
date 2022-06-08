@@ -1,7 +1,19 @@
+#!/usr/bin/python3
 
 import sys
 import re
 import os
+
+
+if len(sys.argv) != 3 or '--help' in sys.argv or '-h' in sys.argv:
+    print("""
+    Usage:
+       %s InfoLogFile.txt DirectoryName
+
+    To be used on the login machine. It will create /tmp/epnlog/DirectoryName/epn***/
+    copying in each of the them the decoder logs and eventually the raw dumps.
+    """%(sys.argv[0]))
+    exit()
 
 infilename = str(sys.argv[1])
 outputdir = str(sys.argv[2])
@@ -58,12 +70,18 @@ for i in range(len(EPN)):
     loglist = os.listdir('/tmp/epnlog/'+outputdir+'/epn'+EPN[i])
     if len(loglist)>0:
         print('EPN '+EPN[i]+': '+str(len(loglist))+' LOG FILES')
+        os.system('ssh epnlog@epn'+EPN[i]+' cp '+DDSPath[i]+'/slots/*/rawdump_ITS*.raw '+outputdir+'/epn'+EPN[i])
+        print('EPN '+EPN[i]+': '+str(len(os.listdir('/tmp/epnlog/'+outputdir+'/epn'+EPN[i]))-len(loglist))+' DUMP RAW FILES')
     else:
         print('EPN '+EPN[i]+': NO (!!) LOG FILES. REMOVING IT.')
         os.system('ssh epnlog@epn'+EPN[i]+' remove '+outputdir+'/epn'+EPN[i])
 
 
 infile.close()
-        
+
+print("YOU CAN COPY ON epnits0 WITH")
+print("ssh valle@epnits0.cern.ch 'mkdir -p /data/nvalle/runXXXXXX/'; scp -r /tmp/epnlog/temp-its/ valle@epnits0.cern.ch:/data/nvalle/runXXXXXX/.")
+
+
                
 

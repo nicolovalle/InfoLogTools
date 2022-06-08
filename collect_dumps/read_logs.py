@@ -1,5 +1,5 @@
 
-
+import sys
 import os
 import re
 
@@ -9,6 +9,6 @@ maindir = '/tmp/epnlog/'+maindir+'/'
 
 epndirlist = [d for d in os.listdir(maindir) if 'epn' in d and os.path.isdir(os.path.join(maindir,d))]
 
-epndirlist = [maindir+d for d in epndirlist]
+epndirlist = [maindir+d+'/' for d in epndirlist]
 
 print(epndirlist)
