@@ -31,21 +31,21 @@ for i in range(len(DDSPath)):
     print(DDSPath[i])
     print(EPN[i])
 
+DirCreated = os.path.isdir('/tmp/epnlog/'+outputdir+'/')
+if DirCreated:
+    print('DIRECTORY ALREADY EXISTS')
+    print('REMOVE IT WITH')
+    print('ssh epnlog@epn'+EPN[0]+' remove '+outputdir)
+    print('OR CREATE A NEW ONE WITH A DIFFERENT NAME. EXIT.')
+    exit()
 
 print('--> RUNNING FAKE COMMAND TO CREATE DIRECTORY')
-print('ssh epnlog@epn'+EPN[0]+' cp '+DDSPath[0]+'version '+outputdir)
-DirCreated = os.path.exists('/tmp/epnlog/'+outputdir+'/version')
+os.system('ssh epnlog@epn'+EPN[0]+' cp '+DDSPath[0]+'version '+outputdir)
+DirCreated = os.path.isdir('/tmp/epnlog/'+outputdir+'/')
 if not DirCreated:
     print('DIRECTORY NOT CREATED. EXIT')
     exit()
 else:
     print('DIRECTORY /tmp/epnlog/'+outputdir+' CREATED') 
                
-
-
-    
-    
-
-
-
 
