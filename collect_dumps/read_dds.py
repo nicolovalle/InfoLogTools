@@ -56,7 +56,7 @@ else:
 for i in range(len(EPN)):
     os.system('ssh epnlog@epn'+EPN[i]+' cp '+DDSPath[i]+'its-stf-decoder*_out.log '+outputdir+'/epn'+EPN[i])
     loglist = os.listdir('/tmp/epnlog/'+outputdir+'/epn'+EPN[i])
-    if len(loglist>0):
+    if len(loglist)>0:
         print('EPN '+EPN[i]+': '+str(len(loglist))+' LOG FILES')
     else:
         print('EPN '+EPN[i]+': NO (!!) LOG FILES. REMOVING IT.')
