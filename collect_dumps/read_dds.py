@@ -27,10 +27,14 @@ for il in lines:
         ReadingError = True
 
 
-for i in range(len(DDSPath)):
-    print(DDSPath[i])
-    print(EPN[i])
+if len(DDSPath) != len(EPN):
+    ReadingError = True
 
+if ReadingError:
+    print('THERE ARE ERRORS. EXIT.')
+    exit()
+
+        
 DirCreated = os.path.isdir('/tmp/epnlog/'+outputdir+'/')
 if DirCreated:
     print('DIRECTORY ALREADY EXISTS')
@@ -46,6 +50,17 @@ if not DirCreated:
     print('DIRECTORY NOT CREATED. EXIT')
     exit()
 else:
-    print('DIRECTORY /tmp/epnlog/'+outputdir+' CREATED') 
+    print('DIRECTORY /tmp/epnlog/'+outputdir+' CREATED')
+
+
+for i in range(len(EPN)):
+    os.system('ssh epnlog@epn'+EPN[i]+' cp '+DDSPath[i]+'its-stf-decoder*_out.log '+outputdir+'/epn'+EPN[i])
+    loglist = os.listdir('/tmp/epnlog/'+outputdir+'/epn'+EPN[i])
+    if len(loglist>0):
+        print('EPN '+EPN[i]+': '+str(len(loglist))+' LOG FILES')
+    else:
+        print('EPN '+EPN[i]+': NO (!!) LOG FILES. REMOVING IT.')
+        os.system('ssh epnlog@epn'+EPN[i]+' remove '+outputdir+'/epn'+EPN[i])
+        
                
 
