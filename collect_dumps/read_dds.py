@@ -61,6 +61,9 @@ for i in range(len(EPN)):
     else:
         print('EPN '+EPN[i]+': NO (!!) LOG FILES. REMOVING IT.')
         os.system('ssh epnlog@epn'+EPN[i]+' remove '+outputdir+'/epn'+EPN[i])
+
+
+infile.close()
         
                
 
