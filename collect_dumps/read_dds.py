@@ -80,7 +80,7 @@ for i in range(len(EPN)):
 infile.close()
 
 print("YOU CAN COPY ON epnits0 WITH")
-print("ssh valle@epnits0.cern.ch 'mkdir -p /data/nvalle/runXXXXXX/'; scp -r /tmp/epnlog/temp-its/ valle@epnits0.cern.ch:/data/nvalle/runXXXXXX/.")
+print("ssh valle@epnits0.cern.ch 'mkdir -p /data/nvalle/runXXXXXX/'; scp -r /tmp/epnlog/"+outputdir+"/ valle@epnits0.cern.ch:/data/nvalle/runXXXXXX/.")
 
 
                
