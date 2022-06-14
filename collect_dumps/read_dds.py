@@ -85,6 +85,8 @@ except:
     runXX = 'runXXXXXX'
 print("YOU CAN COPY ON epnits0 WITH")
 print("ssh valle@epnits0.cern.ch 'mkdir -p /data/nvalle/"+runXX+"/'; scp -r /tmp/epnlog/"+outputdir+"/ valle@epnits0.cern.ch:/data/nvalle/"+runXX+"/.")
+print("AND YOU CAN REMOVE DIRECTORY ON login machine WITH")
+print("ssh epnlog@epn"+EPN[0]+" remove "+outputdir)
 
 
                
