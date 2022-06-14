@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo 'http://alihlt-gw-prod.cern.ch:8081/?q={%22hostname%22:{%22match%22:%22epn%25%22},%22facility%22:{%22match%22:%22%25its-stf-decoder%22},%22run%22:{%22match%22:%22__RUN__%22},%22message%22:{%22match%22:%22%25.raw%25%22},%22severity%22:{%22in%22:%22I%22}}' > epnlogurl.html
+
+sed -i "s/__RUN__/$1/g" epnlogurl.html
+
+
+
+echo ""
+cat epnlogurl.html
+echo ""
+echo "COPIED TO CLIPBOARD"
+echo ""
+
+xclip -sel clip < epnlogurl.html
